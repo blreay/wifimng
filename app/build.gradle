@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+
+
+android {
+    signingConfigs {
+        test2 {
+            keyAlias 'key0'
+            keyPassword 'birthday'
+            storeFile file('D:/zzy/cvs_android_studio/Wifimng/mytest.jks')
+            storePassword 'birthday'
+        }
+    }
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
+    defaultConfig {
+        applicationId "com.blreay.wifimng"
+        minSdkVersion 16
+        targetSdkVersion 19
+        versionCode 1
+        versionName "1.4"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    dexOptions {
+        incremental true
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.test2
+        }
+        debug {
+            signingConfig signingConfigs.test2
+        }
+    }
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    testCompile 'junit:junit:4.12'
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpcore-4.4.6.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/commons-codec-1.9.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/commons-logging-1.2.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/fluent-hc-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-cache-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpclient-win-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/httpmime-4.5.3.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/jna-4.1.0.jar')
+    compile files('libs/httpcomponents-client-4.5.3/lib/jna-platform-4.1.0.jar')
+}
